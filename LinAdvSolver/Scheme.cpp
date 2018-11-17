@@ -74,7 +74,7 @@ void Scheme::write2Vec(string path, vector<double> vec1, vector<double> vec2)
 
 	if (fichier) {
 		for (int i(0); i < vec1.size(); i++) {
-			fichier << to_string(vec1[i]) <<";"<< vec2[i]<< "\n";
+			fichier << to_string(vec1[i]) <<" "<< vec2[i]<< "\n";
 		}
 		fichier << "\n";
 		fichier.close();

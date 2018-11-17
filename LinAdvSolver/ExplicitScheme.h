@@ -10,7 +10,7 @@ public:
 
 	//SOLVERS
 	void solveUpwindExplicit();
-	void solveLaxWendroff2();
+	void solveLaxWendroff();
 
 	//GETS 
 
@@ -18,7 +18,7 @@ public:
 
 	//CONSTRUCTORS / DESTRUCTORS
 	ExplicitScheme();
-	ExplicitScheme(Scheme sheme);
+	ExplicitScheme(Scheme scheme);
 	~ExplicitScheme();
 };
 
