@@ -1,4 +1,3 @@
-#pragma once
 #include "Scheme.h"
 class ExplicitScheme :
 	public Scheme
