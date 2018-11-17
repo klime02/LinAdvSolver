@@ -5,7 +5,7 @@ class ExplicitScheme :
 {
 protected:
 	
-	vector<double> finalVector;
+	vector<double> TESTCHANGE
 
 public:
 
