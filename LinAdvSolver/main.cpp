@@ -17,7 +17,7 @@ int main() {
 	test.baseVecCalculator();
 	//testVec = test.get_baseVector();
 	ExplicitScheme testEx = ExplicitScheme(test);
-	testEx.solveUpwind();
+	testEx.solveUpwindExplicit();
 	vector<double> testVec2 = testEx.get_finalVector();
 
 	vector<double> xVec;
