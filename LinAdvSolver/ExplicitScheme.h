@@ -9,7 +9,8 @@ protected:
 public:
 
 	//SOLVERS
-	void solveUpwind();
+	void solveUpwindExplicit();
+	void solveLaxWendroff();
 
 	//GETS 
 

@@ -158,7 +158,6 @@
   <ItemGroup>
     <ClCompile Include="ExplicitScheme.cpp" />
     <ClCompile Include="ImplicitScheme.cpp" />
-    <ClCompile Include="LinAdvSolver.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Scheme.cpp" />
   </ItemGroup>

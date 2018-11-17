@@ -2,7 +2,7 @@
 
 
 
-void ExplicitScheme::solveUpwind()
+void ExplicitScheme::solveUpwindExplicit()
 {
 	vector<double> temp;
 	
