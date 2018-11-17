@@ -1,11 +1,10 @@
-#pragma once
 #include "Scheme.h"
 class ExplicitScheme :
 	public Scheme
 {
 protected:
 	
-	vector<double> TESTCHANGE3
+	vector<double> finalVector;
 
 public:
 
