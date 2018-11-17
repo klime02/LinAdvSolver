@@ -10,7 +10,8 @@ int main() {
 	double deltaX = 5.0;
 	double deltaT002 = 0.02;
 	double tMax = 0.5;
-	Scheme test = Scheme(deltaT002, deltaX, tMax);
+	double current_t = 0.3;
+	Scheme test = Scheme(deltaT002, deltaX, tMax, current_t);
 	test.analitycalSolver();
 	vector<double> testVec = test.get_analitycalSolution();
 

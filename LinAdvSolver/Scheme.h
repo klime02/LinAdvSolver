@@ -51,7 +51,7 @@ public:
 
 
 	//CONSTRUCTORS/DESTRUCTORS
-	Scheme(double deltaT,double deltaX, double tMax);
+	Scheme(double deltaT,double deltaX, double tMax, double current_t);
 	Scheme();
 	~Scheme();
 };

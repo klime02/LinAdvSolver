@@ -9,11 +9,11 @@ void Scheme::analitycalSolver()
 	double Pi = 3.141592;
 	for (int i(0); i < nb_points; i++) {
 
-		if (i*delta_x <= 50.0) {
+		if (i*delta_x <= (50.0 + (250.0 * current_t))) {
 			analitycalSolutionVector[i] = 0.0;
 		}
-		else if (50 < (i * delta_x) && (i*delta_x) < 110) {
-			analitycalSolutionVector[i] = 100.0 * sin(Pi*(((i*delta_x) - 50.0 - (250.0 * t_max)) / 60.0));
+		else if ((50 + (250*current_t)) < (i * delta_x) && (i*delta_x) < (110 + (250*current_t))) {
+			analitycalSolutionVector[i] = 100.0 * sin(Pi*(((i*delta_x) - 50.0 - (250.0 * current_t)) / 60.0));
 
 		}
 		else {
@@ -85,7 +85,7 @@ void Scheme::write2Vec(string path, vector<double> vec1, vector<double> vec2)
 }
 
 
-Scheme::Scheme(double deltaT, double deltaX, double tMax) : delta_t(deltaT), delta_x(deltaX), t_max(tMax), analitycalSolutionVector(vector<double>(nb_points+1)),baseVector(vector<double>(nb_points+1)) {
+Scheme::Scheme(double deltaT, double deltaX, double tMax, double current_t) : delta_t(deltaT), delta_x(deltaX), t_max(tMax), current_t(current_t), analitycalSolutionVector(vector<double>(nb_points+1)),baseVector(vector<double>(nb_points+1)) {
 
 }
 
