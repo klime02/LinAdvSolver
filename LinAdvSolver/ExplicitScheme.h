@@ -10,7 +10,7 @@ public:
 
 	//SOLVERS
 	void solveUpwindExplicit();
-	void solveLaxWendroff();
+	void solveLaxWendroff2();
 
 	//GETS 
 
