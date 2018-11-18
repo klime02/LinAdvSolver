@@ -4,7 +4,7 @@
 
 vector<double> ImplicitScheme::thomasAlgo(double a, double b, double c, vector<double> vectorInit)
 {
-	vector<double> vectorResult(nb_points);
+	vector<double> vectorResult(nb_points+1);
 	double m = 0.0;
 	double bk = 0.0;
 	
