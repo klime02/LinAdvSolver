@@ -47,9 +47,14 @@ public:
 	void write2Vec(string path, vector<double> vec1, vector<double> vec2);
 
 	//******************************************//
+	//17/11/2018
+	vector<double> errorVectorCalc(vector<double> vec1,vector<double> vec2);
+	double normOne(vector<double> vec);
 
+	double normTwo(vector<double> vec);
 
-
+	double uniformNorm(vector<double> vec);
+	
 	//CONSTRUCTORS/DESTRUCTORS
 	Scheme(double deltaT,double deltaX, double tMax);
 	Scheme();
