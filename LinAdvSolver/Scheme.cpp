@@ -64,7 +64,7 @@ void Scheme::writeVec(string path, vector<double> vec) {
 		fichier.close();
 	}
 	else
-		cerr << "Erreur à l'ouverture !" << endl;
+		cerr << "Erreur Ã  l'ouverture !" << endl;
 
 }
 
@@ -80,10 +80,57 @@ void Scheme::write2Vec(string path, vector<double> vec1, vector<double> vec2)
 		fichier.close();
 	}
 	else
-		cerr << "Erreur à l'ouverture !" << endl;
+		cerr << "Erreur Ã  l'ouverture !" << endl;
 
 }
 
+vector<double> Scheme::errorVectorCalc(vector<double> vec1, vector<double> vec2)
+{
+	//Creation of the returned error vector
+	vector<double> errorVec(nb_points);
+
+	for (int i = 0; i < nb_points; i++) {
+
+		errorVec[i] = abs(vec1[i] - vec2[i]);
+
+	}
+
+
+	return errorVec;
+}
+
+double Scheme::normOne(vector<double> vec)
+{
+	double result = 0.0;
+
+	for (int i = 0; i < nb_points; i++) {
+		result += abs(vec[i]);
+	}
+
+	return result/nb_points;
+}
+
+double Scheme::normTwo(vector<double> vec)
+{
+	double result = 0.0;
+
+	for (int i = 0; i < nb_points; i++) {
+		result += (vec[i]*vec[i]);
+	}
+
+	return sqrt(result) / nb_points;
+}
+
+double Scheme::uniformNorm(vector<double> vec)
+{
+	double result = abs(vec[0]);
+
+	for (int i = 1; i < nb_points; i++) {
+		if (vec[i] > result)  result = vec[i];
+	}
+
+	return result;
+}
 
 Scheme::Scheme(double deltaT, double deltaX, double tMax) : delta_t(deltaT), delta_x(deltaX), t_max(tMax), analitycalSolutionVector(vector<double>(nb_points+1)),baseVector(vector<double>(nb_points+1)) {
 
