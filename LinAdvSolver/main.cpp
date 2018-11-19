@@ -8,32 +8,49 @@ using namespace std;
 
 int main() {
 	double deltaX = 5.0;
-	double deltaT002 = 0.01;
+	double deltaT = 0.005;
 	double tMax = 0.5;
-	double current_t = 0.5;
-	Scheme test = Scheme(deltaT002, deltaX, tMax, current_t);
-	test.analitycalSolver();
-	vector<double> testVecAnalytical = test.get_analitycalSolution();
+	double analytical_t = 0.52;
 
-	test.baseVecCalculator();
-	ExplicitScheme testEx = ExplicitScheme(test);
-	testEx.solveUpwindExplicit();
-	vector<double> testVecUpwind = testEx.get_finalVector();
-	testEx.solveLaxWendroff();
-	vector<double> testVecLax = testEx.get_finalVector();
+	//INITIALIZE SCHEME OBJECT
+	Scheme SchemeObj = Scheme(deltaT, deltaX, tMax, analytical_t); //Create the Scheme object
+	SchemeObj.analyticalSolver();
+	vector<double> AnalyticSol = SchemeObj.get_analyticalSolution(); //Analytical Solution vector
+	SchemeObj.baseVecCalculator();
+
+	// EXPLICIT CALLS
+	ExplicitScheme ExpTest = ExplicitScheme(SchemeObj);
+	ExpTest.solveUpwindExplicit();
+	vector<double> UpwindSol = ExpTest.get_finalVector();
+	ExpTest.solveLaxWendroff();
+	vector<double> LaxSol = ExpTest.get_finalVector();
+
+	//ERROR + NORMS
+
+	//Upwind
+	vector<double> ErrorUpwind = ExpTest.errorVectorCalc(UpwindSol, AnalyticSol);
+	double UpwindNorm1 = ExpTest.normOne(ErrorUpwind);
+	double UpwindNorm2 = ExpTest.normTwo(ErrorUpwind);
+	double UpwindNormUni = ExpTest.uniformNorm(ErrorUpwind);
+
+	//Lax-Wendroff
+	vector<double> ErrorLax = ExpTest.errorVectorCalc(LaxSol, AnalyticSol);
+	double LaxNorm1 = ExpTest.normOne(ErrorLax);
+	double LaxNorm2 = ExpTest.normTwo(ErrorLax);
+	double LaxNormUni = ExpTest.uniformNorm(ErrorLax);
+
+	cout << "UPWIND ERROR NORMS: " << UpwindNorm1 << " " << UpwindNorm2 << " " << UpwindNormUni << "\n";
+	cout << "LAX ERROR NORMS: " << LaxNorm1 << " " << LaxNorm2 << " " << LaxNormUni << "\n";
+
+
 	vector<double> xVec;
-	for (int i(0); i < testVecAnalytical.size(); i++) {
+	for (int i(0); i < AnalyticSol.size(); i++) {
 		xVec.push_back(i*deltaX);
 	}
 
+	SchemeObj.write2Vec("Upwind.txt", xVec, UpwindSol);
+	SchemeObj.write2Vec("LaxWendroff.txt", xVec, LaxSol);
+	SchemeObj.write2Vec("Analytical.txt", xVec, AnalyticSol);
 
-
-	//DISPLAY
-	cout << "START :\nAnalitycal solution :\n";
-
-	test.write2Vec("test.txt", xVec,testVecAnalytical);
-	test.write2Vec("test2.txt", xVec, testVecUpwind);
-	test.write2Vec("test3.txt", xVec, testVecLax);
-	system("PAUSE");
 	return 0;
 }

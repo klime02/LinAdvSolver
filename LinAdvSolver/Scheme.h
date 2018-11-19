@@ -13,7 +13,7 @@ protected:
 	double delta_x;
 	
 	
-	double current_t;
+	double analytical_t;
 	int nb_points = 80;
 	double t_max;
 
@@ -22,7 +22,7 @@ protected:
 	const double L= 400.0;
 	const double u = 250.0;
 
-	vector<double> analitycalSolutionVector;
+	vector<double> analyticalSolutionVector;
 	vector<double> baseVector;
 	//******************************************//
 
@@ -30,12 +30,12 @@ protected:
 public:
 	
 	//SOLVER
-	void analitycalSolver();
+	void analyticalSolver();
 	void baseVecCalculator();
 	//******************************************//
 
 	//GETS
-	vector<double> get_analitycalSolution();
+	vector<double> get_analyticalSolution();
 	vector<double> get_baseVector();
 	//******************************************//
 	
@@ -49,9 +49,17 @@ public:
 	//******************************************//
 
 
+	//******************************************//
+	//NORMS
+	vector<double> errorVectorCalc(vector<double> vec1, vector<double> vec2);
+	double normOne(vector<double> vec);
+
+	double normTwo(vector<double> vec);
+
+	double uniformNorm(vector<double> vec);
 
 	//CONSTRUCTORS/DESTRUCTORS
-	Scheme(double deltaT,double deltaX, double tMax, double current_t);
+	Scheme(double deltaT, double deltaX, double tMax, double analytical_t);
 	Scheme();
 	~Scheme();
 };
