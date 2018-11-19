@@ -7,20 +7,20 @@ vector<double> ImplicitScheme::thomasAlgo(double a, double b, double c, vector<d
 	vector<double> vectorResult(nb_points+1);
 	double m = 0.0;
 	double bk = 0.0;
-	
+
 	vector<double> vecD = vectorInit;
 
 	m = a / b;
 	bk = b - (m*c);
-	
+
 	for (int k = 2; k < nb_points + 1; k++) {
-	
+
 		vecD[k] -= m * vecD[k - 1];
 
 	}
 	vectorResult[nb_points] = vecD[nb_points] / bk;
 
-	for (int k = nb_points - 1; k > 0;k--) {
+	for (int k = nb_points - 1; k > 0; k--) {
 
 		vectorResult[k] = (vecD[k] - (c*vectorResult[k + 1])) / bk;
 
@@ -48,4 +48,78 @@ ImplicitScheme::~ImplicitScheme()
 vector<double> ImplicitScheme::get_finalVector()
 {
 	return finalVector;
+}
+
+vector<vector<double>> ImplicitScheme::ftcsSolver() {
+	vector<vector<double>> finalResults;
+	baseVecCalculator();
+	double alpha = (u*delta_t) / (2.0*delta_x);
+	double a = -alpha;
+	double b = 1.0;
+	double c = alpha;
+	vector<double> temp = baseVector;
+	finalVector = thomasAlgo(a, b, c, temp);
+	finalVector[0] = 0.0;
+	finalVector[nb_points] = 0.0;
+
+
+	while (current_t <= (t_max + (delta_t / 4.0))) {
+
+		finalVector = thomasAlgo(a, b, c, temp);
+		
+		finalVector[0] = 0.0;
+		finalVector[nb_points] = 0.0;
+		temp = finalVector;
+		
+		
+		
+		
+		if ((current_t < (0.1 + (delta_t / 4.0)) && current_t >(0.1 - (delta_t / 4.0))) || (current_t < (0.2 + (delta_t / 4.0)) && current_t >(0.2 - (delta_t / 4.0))) || (current_t < (0.3 + (delta_t / 4.0)) && current_t >(0.3 - (delta_t / 4.0))) || (current_t < (0.4 + (delta_t / 4.0)) && current_t >(0.4 - (delta_t / 4.0))) || (current_t < (0.5 + (delta_t / 4.0)) && current_t >(0.5 - (delta_t / 4.0)))) {
+
+			finalResults.push_back(finalVector);
+
+		}
+
+		current_t += delta_t;
+
+	}
+
+	return finalResults;
+}
+
+vector<vector<double>> ImplicitScheme::upwindImplicitSolver() {
+	vector<vector<double>> finalResults;
+	baseVecCalculator();
+	double alpha = (u*delta_t) / delta_x;
+	double a = -alpha;
+	double b = 1.0+alpha;
+	double c = 0.0;
+	vector<double> temp = baseVector;
+	finalVector = thomasAlgo(a, b, c, temp);
+	finalVector[0] = 0.0;
+	finalVector[nb_points] = 0.0;
+
+
+	while (current_t < (t_max + (delta_t / 4.0))) {
+
+		finalVector = thomasAlgo(a, b, c, temp);
+
+		finalVector[0] = 0.0;
+		finalVector[nb_points] = 0.0;
+		temp = finalVector;
+
+
+
+
+		if ((current_t < (0.1 + (delta_t/4.0)) && current_t >(0.1 - (delta_t/4.0))) || (current_t < (0.2 + (delta_t/4.0)) && current_t >(0.2 - (delta_t/4.0))) || (current_t < (0.3 + (delta_t/4.0)) && current_t >(0.3 - (delta_t/4.0))) || (current_t < (0.4 + (delta_t/4.0)) && current_t >(0.4 - (delta_t/4.0))) || (current_t < (0.5 + (delta_t/4.0)) && current_t >(0.5 - (delta_t/4.0)))) {
+
+			finalResults.push_back(finalVector);
+
+		}
+
+		current_t += delta_t;
+
+	}
+
+	return finalResults;
 }
