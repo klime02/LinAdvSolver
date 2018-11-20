@@ -11,8 +11,7 @@ protected:
 	//VARIABLES
 	double delta_t;
 	double delta_x;
-	
-	
+	double current_t;
 	double analytical_t;
 	int nb_points = 80;
 	double t_max;
@@ -59,7 +58,7 @@ public:
 	double uniformNorm(vector<double> vec);
 
 	//CONSTRUCTORS/DESTRUCTORS
-	Scheme(double deltaT, double deltaX, double tMax, double analytical_t);
+	Scheme(double deltaT, double deltaX, double tMax, double analytical_t, double current_t);
 	Scheme();
 	~Scheme();
 };
