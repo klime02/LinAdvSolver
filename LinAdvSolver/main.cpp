@@ -13,27 +13,23 @@ int main() {
 	double current_t = 0.5;
 	Scheme test = Scheme(deltaT002, deltaX, tMax, current_t);
 	test.analitycalSolver();
-	vector<double> testVecAnalytical = test.get_analitycalSolution();
 
-	test.baseVecCalculator();
-	ExplicitScheme testEx = ExplicitScheme(test);
-	testEx.solveUpwindExplicit();
-	vector<double> testVecUpwind = testEx.get_finalVector();
-	testEx.solveLaxWendroff();
-	vector<double> testVecLax = testEx.get_finalVector();
+	ImplicitScheme testIm = ImplicitScheme(test);
+	testIm.baseVecCalculator();
+	vector<double> basevec = testIm.get_baseVector();
+	testIm.thomasAlgo(1,2,3,basevec);
+	vector<double> testVecImp = testIm.get_finalVector();
 	vector<double> xVec;
-	for (int i(0); i < testVecAnalytical.size(); i++) {
-		xVec.push_back(i*deltaX);
-	}
+
 
 
 
 	//DISPLAY
-	cout << "START :\nAnalitycal solution :\n";
+	//cout << "START :\nAnalitycal solution :\n";
 
-	test.write2Vec("test.txt", xVec,testVecAnalytical);
-	test.write2Vec("test2.txt", xVec, testVecUpwind);
-	test.write2Vec("test3.txt", xVec, testVecLax);
-	system("PAUSE");
+	//test.write2Vec("test.txt", xVec,testVecAnalytical);
+	//test.write2Vec("test2.txt", xVec, testVecUpwind);
+	//test.write2Vec("test3.txt", xVec, testVecLax);
+	//system("PAUSE");
 	return 0;
 }
