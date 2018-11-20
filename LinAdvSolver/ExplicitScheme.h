@@ -9,7 +9,8 @@ protected:
 public:
 
 	//SOLVERS
-	void solveUpwind();
+	void solveUpwindExplicit();
+	void solveLaxWendroff();
 
 	//GETS 
 
@@ -17,7 +18,7 @@ public:
 
 	//CONSTRUCTORS / DESTRUCTORS
 	ExplicitScheme();
-	ExplicitScheme(Scheme sheme);
+	ExplicitScheme(Scheme scheme);
 	~ExplicitScheme();
 };
 
