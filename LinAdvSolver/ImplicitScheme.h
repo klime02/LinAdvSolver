@@ -10,5 +10,6 @@ public:
 	ImplicitScheme(Scheme mother);
 	~ImplicitScheme();
 	vector<double> get_finalVector();
+	vector<vector<double>> solveFTCSImplicit();
+	vector<vector<double>> solveUpwindImplicit();
 };
-

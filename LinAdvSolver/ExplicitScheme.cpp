@@ -9,7 +9,7 @@ void ExplicitScheme::solveUpwindExplicit()
 	temp = baseVector;
 	finalVector = baseVector;
 
-	for (double currentComputeT(delta_t); currentComputeT < this->t_max; currentComputeT += delta_t)
+	for (double currentComputeT(delta_t); currentComputeT <= this->t_max + delta_t; currentComputeT += delta_t)
 	{
 		finalVector[0] = 0.0;
 		for (int i(1); i < nb_points; i++)
@@ -29,7 +29,7 @@ void ExplicitScheme::solveLaxWendroff()
 	temp = baseVector;
 	finalVector = baseVector;
 
-	for (double currentComputeT(delta_t); currentComputeT < this->t_max; currentComputeT += delta_t)
+	for (double currentComputeT(delta_t); currentComputeT <= this->t_max + delta_t; currentComputeT += delta_t)
 	{
 		finalVector[0] = 0.0;
 		double constant1 = (u * delta_t) / (2 * delta_x);
