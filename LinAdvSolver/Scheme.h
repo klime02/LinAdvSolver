@@ -1,4 +1,3 @@
-#pragma once
 #include <math.h>
 #include <vector>
 #include <iostream>
@@ -38,17 +37,7 @@ public:
 	vector<double> get_baseVector();
 	//******************************************//
 	
-	//DISPLAY
 
-	//WRITE A VECTOR IN A .TXT
-	void writeVec(string path, vector<double> vec);
-	
-	void write2Vec(string path, vector<double> vec1, vector<double> vec2);
-
-	//******************************************//
-
-
-	//******************************************//
 	//NORMS
 	vector<double> errorVectorCalc(vector<double> vec1, vector<double> vec2);
 	double normOne(vector<double> vec);

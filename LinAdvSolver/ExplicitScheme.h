@@ -9,11 +9,10 @@ protected:
 public:
 
 	//SOLVERS
-	void solveUpwindExplicit();
-	void solveLaxWendroff();
+	vector<vector<double>> solveUpwindExplicit();
+	vector<vector<double>> solveLaxWendroff();
 
-	//GETS 
-
+	//GETTER
 	vector<double> get_finalVector();
 
 	//CONSTRUCTORS / DESTRUCTORS

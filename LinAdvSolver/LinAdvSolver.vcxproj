@@ -151,11 +151,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Display.h" />
     <ClInclude Include="ExplicitScheme.h" />
     <ClInclude Include="ImplicitScheme.h" />
     <ClInclude Include="Scheme.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Display.cpp" />
     <ClCompile Include="ExplicitScheme.cpp" />
     <ClCompile Include="ImplicitScheme.cpp" />
     <ClCompile Include="main.cpp" />

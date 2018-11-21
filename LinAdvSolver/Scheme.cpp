@@ -51,38 +51,6 @@ vector<double> Scheme::get_baseVector()
 	return baseVector;
 }
 
-//WRITE A VECTOR IN A .TXT
-void Scheme::writeVec(string path, vector<double> vec) {
-	ofstream fichier(path, ios::out | ios::trunc);
-
-	if (fichier) {
-		for (int i(0); i < vec.size(); i++) {
-			fichier << to_string(vec[i]) << "\n";
-		}
-		fichier << "\n";
-		fichier.close();
-	}
-	else
-		cerr << "Erreur à l'ouverture !" << endl;
-
-}
-
-void Scheme::write2Vec(string path, vector<double> vec1, vector<double> vec2)
-{
-	ofstream fichier(path, ios::out | ios::trunc);
-
-	if (fichier) {
-		for (int i(0); i < vec1.size(); i++) {
-			fichier << to_string(vec1[i]) <<" "<< vec2[i]<< "\n";
-		}
-		fichier << "\n";
-		fichier.close();
-	}
-	else
-		cerr << "Erreur à l'ouverture !" << endl;
-
-}
-
 
 vector<double> Scheme::errorVectorCalc(vector<double> vec1, vector<double> vec2)
 {

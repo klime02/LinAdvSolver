@@ -1,7 +1,5 @@
 #include "ImplicitScheme.h"
 
-
-
 vector<double> ImplicitScheme::thomasAlgo(double a, double b, double c, vector<double> vectorInit)
 {
 	vector<double> vectorResult(nb_points + 1);
@@ -33,23 +31,20 @@ vector<double> ImplicitScheme::thomasAlgo(double a, double b, double c, vector<d
 
 vector<vector<double>> ImplicitScheme::solveUpwindImplicit() {
 	vector<vector<double>> finalResults;
-	current_t = 0.0;
-	baseVecCalculator();
 	double alpha = (u*delta_t) / delta_x;
 	double a = -alpha;
 	double b = 1.0 + alpha;
 	double c = 0.0;
 	vector<double> temp = baseVector;
+	finalResults.push_back(temp);
 	finalVector = thomasAlgo(a, b, c, temp);
 	finalVector[0] = 0.0;
 	finalVector[nb_points] = 0.0;
-
+	finalResults.push_back(finalVector);
+	current_t = delta_t;
 
 	while (current_t < (t_max + (delta_t / 4.0))) {
-		cout << current_t << "\n";
-
 		finalVector = thomasAlgo(a, b, c, temp);
-
 		finalVector[0] = 0.0;
 		finalVector[nb_points] = 0.0;
 		temp = finalVector;
@@ -69,17 +64,17 @@ vector<vector<double>> ImplicitScheme::solveUpwindImplicit() {
 
 vector<vector<double>> ImplicitScheme::solveFTCSImplicit() {
 	vector<vector<double>> finalResults;
-	current_t = 0.0;
-	baseVecCalculator();
 	double alpha = (u*delta_t) / (2.0*delta_x);
 	double a = -alpha;
 	double b = 1.0;
 	double c = alpha;
 	vector<double> temp = baseVector;
+	finalResults.push_back(temp);
 	finalVector = thomasAlgo(a, b, c, temp);
 	finalVector[0] = 0.0;
 	finalVector[nb_points] = 0.0;
-
+	current_t = delta_t;
+	
 
 	while (current_t < (t_max + (delta_t / 4.0))) {
 
@@ -92,7 +87,6 @@ vector<vector<double>> ImplicitScheme::solveFTCSImplicit() {
 		if ((current_t < (0.1 + (delta_t / 4.0)) && current_t >(0.1 - (delta_t / 4.0))) || (current_t < (0.2 + (delta_t / 4.0)) && current_t >(0.2 - (delta_t / 4.0))) || (current_t < (0.3 + (delta_t / 4.0)) && current_t >(0.3 - (delta_t / 4.0))) || (current_t < (0.4 + (delta_t / 4.0)) && current_t >(0.4 - (delta_t / 4.0))) || (current_t < (0.5 + (delta_t / 4.0)) && current_t >(0.5 - (delta_t / 4.0)))) {
 
 			finalResults.push_back(finalVector);
-
 		}
 
 		current_t += delta_t;
@@ -115,7 +109,6 @@ ImplicitScheme::ImplicitScheme(Scheme mother) : Scheme(mother), finalVector(vect
 {
 
 }
-
 
 ImplicitScheme::~ImplicitScheme()
 {
