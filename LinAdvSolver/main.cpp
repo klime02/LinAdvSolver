@@ -17,9 +17,48 @@ int main() {
 	Scheme SchemeObj = Scheme(deltaT, deltaX, tMax, analytical_t, current_t); //Create the Scheme object
 	SchemeObj.analyticalSolver();
 	vector<double> AnalyticSol = SchemeObj.get_analyticalSolution(); //Analytical Solution vector
-	SchemeObj.baseVecCalculator();
-	vector<double> BaseVecSol = SchemeObj.get_baseVector();
+	
+	int methodSelect;
+	int dtselect;
 
+	cout << "----------Linear Advection Solver----------" << "\n";
+	cout << "Solver options" << "\n";
+	cout << "0 - Analytical Solution" << "\n";
+	cout << "1 - Explicit Upwind Solution" << "\n";
+	cout << "2 - Explicit Lax-Wendroff Solution" << "\n";
+	cout << "3 - Implict Upwind Solution" << "\n";
+	cout << "4 - Implicit FTCS Solution" << "\n";
+	cout << "Select a solving method: ";
+
+	while (!(cin >> methodSelect))
+	{
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		cout << "Sorry, that was not a valid selection. Please enter an method shown: ";
+	}
+	
+	cout << "Timestep options" << "\n";
+	cout << "0 - 0.02s" << "\n";
+	cout << "1 - 0.01s" << "\n";
+	cout << "2 - 0.005s" << "\n";
+	cout << "Select a timestep: ";
+
+	while (!(cin >> dtselect))
+	{
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		cout << "Sorry, that was not a valid selection. Please enter an timestep option shown: ";
+	}
+
+	if ((methodSelect || dtselect < 0) || (methodSelect > 4) || (dtselect > 2))
+	{
+		cout << "Invalid selections" << "\n";
+		return 1;
+	}
+
+
+
+	/*
 
 	//EXPLICIT CALLS
 	ExplicitScheme ExpTest = ExplicitScheme(SchemeObj);
@@ -63,5 +102,6 @@ int main() {
 	SchemeObj.write2Vec("OutUpwindImplicit.txt", xVec, ImpUpwindSol);
 	SchemeObj.write2Vec("OutFTCSImplicit.txt", xVec, ImpFTCSSol);
 
+	/**/
 	return 0;
 }
