@@ -23,9 +23,6 @@ vector<double> ImplicitScheme::thomasAlgo(double a, double b, double c, vector<d
 		vectorResult[k] = (vecD[k] - (c*vectorResult[k + 1])) / bk;
 
 	}
-
-
-	cout << vectorResult[vectorResult.size() - 1] << "\n";
 	return vectorResult;
 }
 
@@ -45,7 +42,6 @@ vector<vector<double>> ImplicitScheme::solveUpwindImplicit() {
 
 	while (current_t < (t_max + (delta_t / 4.0))) {
 		finalVector = thomasAlgo(a, b, c, temp);
-		cout << finalVector[finalVector.size() - 1] << "\n";
 		finalVector[0] = 0.0;
 		finalVector[nb_points] = 0.0;
 		temp = finalVector;

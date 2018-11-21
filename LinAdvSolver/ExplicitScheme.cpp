@@ -18,6 +18,7 @@ vector<vector<double>> ExplicitScheme::solveUpwindExplicit() {
 		{
 			finalVector[i] = temp[i] - ((u * delta_t) / delta_x)*(temp[i] - temp[i - 1]);
 		}
+		finalVector[finalVector.size() - 1] = 0.0;
 		temp = finalVector;
 
 		if ((current_t < (0.1 + (delta_t / 4.0)) && current_t >(0.1 - (delta_t / 4.0))) || (current_t < (0.2 + (delta_t / 4.0)) && current_t >(0.2 - (delta_t / 4.0))) || (current_t < (0.3 + (delta_t / 4.0)) && current_t >(0.3 - (delta_t / 4.0))) || (current_t < (0.4 + (delta_t / 4.0)) && current_t >(0.4 - (delta_t / 4.0))) || (current_t < (0.5 + (delta_t / 4.0)) && current_t >(0.5 - (delta_t / 4.0)))) 

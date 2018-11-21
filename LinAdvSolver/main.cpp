@@ -211,7 +211,6 @@ int main() {
 		if (restart == "y" || restart == "Y" || restart == "yes" || restart == "YES")
 		{
 			stop = false;
-			cout << "TRIIGERD";
 		}
 		else
 		{
