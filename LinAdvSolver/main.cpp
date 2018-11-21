@@ -20,42 +20,47 @@ int main() {
 	
 	int methodSelect;
 	int dtselect;
+	bool finalSelect = false;
 
-	cout << "----------Linear Advection Solver----------" << "\n";
-	cout << "Solver options" << "\n";
-	cout << "0 - Analytical Solution" << "\n";
-	cout << "1 - Explicit Upwind Solution" << "\n";
-	cout << "2 - Explicit Lax-Wendroff Solution" << "\n";
-	cout << "3 - Implict Upwind Solution" << "\n";
-	cout << "4 - Implicit FTCS Solution" << "\n";
-	cout << "Select a solving method: ";
-
-	while (!(cin >> methodSelect))
+	while (!finalSelect)
 	{
-		cin.clear();
-		cin.ignore(numeric_limits<streamsize>::max(), '\n');
-		cout << "Sorry, that was not a valid selection. Please enter an method shown: ";
-	}
-	
-	cout << "Timestep options" << "\n";
-	cout << "0 - 0.02s" << "\n";
-	cout << "1 - 0.01s" << "\n";
-	cout << "2 - 0.005s" << "\n";
-	cout << "Select a timestep: ";
+		cout << "\n----------Linear Advection Solver----------" << "\n";
+		cout << "Solver options" << "\n";
+		cout << "0 - Analytical Solution" << "\n";
+		cout << "1 - Explicit Upwind Solution" << "\n";
+		cout << "2 - Explicit Lax-Wendroff Solution" << "\n";
+		cout << "3 - Implict Upwind Solution" << "\n";
+		cout << "4 - Implicit FTCS Solution" << "\n";
+		cout << "Select a solving method: ";
+		while (!(cin >> methodSelect))
+		{
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			cout << "Sorry, that was not a valid selection. Please enter an method shown: ";
+		}
 
-	while (!(cin >> dtselect))
-	{
-		cin.clear();
-		cin.ignore(numeric_limits<streamsize>::max(), '\n');
-		cout << "Sorry, that was not a valid selection. Please enter an timestep option shown: ";
-	}
+		cout << "Timestep options" << "\n";
+		cout << "0 - 0.02s" << "\n";
+		cout << "1 - 0.01s" << "\n";
+		cout << "2 - 0.005s" << "\n";
+		cout << "Select a timestep: ";
 
-	if ((methodSelect || dtselect < 0) || (methodSelect > 4) || (dtselect > 2))
-	{
-		cout << "Invalid selections" << "\n";
-		return 1;
-	}
+		while (!(cin >> dtselect))
+		{
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+			cout << "Sorry, that was not a valid selection. Please enter an timestep option shown: ";
+		}
 
+		if (methodSelect < 0 || dtselect < 0 || methodSelect > 4 || dtselect > 2)
+		{
+			cout << "\nInvalid selections. Please select an integer from the list" << "\n";
+		}
+		else
+		{
+			finalSelect = true;
+		}
+	}
 
 
 	/*
